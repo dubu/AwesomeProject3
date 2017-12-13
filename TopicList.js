@@ -35,7 +35,8 @@ class HomeScreenView extends React.Component {
     }
 
     makeRemoteRequest = () => {
-        var url = "https://randomuser.me/api/?page=3&results=3";
+        // var url = "https://randomuser.me/api/?page=3&results=3";
+        var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
         var req = fetch(url ).then(res => res.json());
         Promise.all([req])
             .then(([data]) => {
@@ -44,7 +45,7 @@ class HomeScreenView extends React.Component {
                 // this.setState({topics: data.items})
                 // this.setState({dataSource: data.results})
                 this.setState({
-                    data: data.results
+                    data: data.list
                 });
 
                 console.log("load");
@@ -60,6 +61,8 @@ class HomeScreenView extends React.Component {
                 height: 100
             }
         });
+
+
         return <View>
             <Text>Home Screen</Text>
             <Button
@@ -72,17 +75,17 @@ class HomeScreenView extends React.Component {
                     data={this.state.data}
                     renderItem={({ item }) => (
                         <ListItem
-                            title={`${item.name.first} ${item.name.last}`}
-                            subtitle={
+                            title={`${item.episodeName} `}
+                            avatar={
                                 <View>
-                                    <Image style={styles.stretch} source={{uri: item.picture.thumbnail }} />
-                                    <Text>5 months ago</Text>
+                                    <Image style={styles.stretch} source={{uri: "https://t1.daumcdn.net/news/201711/18/storyfunding/20171118191017819nggz.jpg"}} />
                                 </View>
                             }
+                            subtitle={item.projectName}
                             containerStyle={{ borderBottomWidth: 0 }}
                         />
                     )}
-                    keyExtractor={item => item.email}
+                    keyExtractor={item => item.episodeId}
                     onEndReachedThreshold={50}
                 />
             </List>
