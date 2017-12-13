@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, Button, ListView} from 'react-native';
-
+import { View, Text, FlatList, ActivityIndicator, Button } from "react-native";
+import { List, ListItem, SearchBar } from "react-native-elements";
 
 
 // const HomeScreen = ({ navigation }) => (
@@ -13,7 +13,7 @@ import {View, Text, Button, ListView} from 'react-native';
 //     </View>
 // );
 
-var jsonHeader = {headers:{Accept:'application/json'}};
+// var jsonHeader = {headers:{Accept:'application/json'}};
 
 const HomeScreen = ({ navigation }) => (
     <HomeScreenView navigation={navigation} />
@@ -21,51 +21,62 @@ const HomeScreen = ({ navigation }) => (
 
 
 class HomeScreenView extends React.Component {
+    state = {selected: (new Map(): Map<string, boolean>)};
 
     constructor() {
         super();
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+            data: [],
+            refreshing: false
         };
+    }
 
-        var url = "https://randomuser.me/api/?page=3&results=10";
-        var req = fetch(url , jsonHeader).then(res => res.json());
+    componentDidMount() {
+        this.makeRemoteRequest();
+    }
+
+    makeRemoteRequest = () => {
+        var url = "https://randomuser.me/api/?page=3&results=5";
+        var req = fetch(url ).then(res => res.json());
         Promise.all([req])
             .then(([data]) => {
                 console.log(data);
-
                 // this.topics = data;
                 // this.setState({topics: data.items})
                 // this.setState({dataSource: data.results})
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows( data.results)
+                    data: data.results
                 });
+
                 console.log("load");
             });
     }
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this._shareMessage = this._shareMessage.bind(this);
-    //     this._shareText = this._shareText.bind(this);
-    //     this._showResult = this._showResult.bind(this);
-    //
-    //     this.state = {
-    //         result: ''
-    //     };
+
     render() {
         const { navigation } = this.props;
-        return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        return <View>
             <Text>Home Screen</Text>
             <Button
                 onPress={() => navigation.navigate('Details')}
                 title="Goto detail"
             />
-            <ListView
-                dataSource={this.state.dataSource}
-                renderRow={(rowData) => <Text>{rowData.gender}</Text>}
-            />
+
+            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+                <FlatList
+                    data={this.state.data}
+                    renderItem={({ item }) => (
+                        <ListItem
+                            title={`${item.name.first} ${item.name.last}`}
+                            subtitle={"aa"}
+                            avatar={{ uri: item.picture.thumbnail }}
+                            containerStyle={{ borderBottomWidth: 0 }}
+                        />
+                    )}
+                    keyExtractor={item => item.email}
+                    onEndReachedThreshold={50}
+                />
+            </List>
+
             <Button
                 onPress={() => navigation.navigate('FlatList')}
                 title="Goto List"
@@ -73,13 +84,6 @@ class HomeScreenView extends React.Component {
         </View>
     }
 
-    reloadTopics() {
-
-    //
-    }
 }
-
-
-
 
 export default HomeScreen
