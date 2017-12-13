@@ -77,7 +77,7 @@ class HomeScreenView extends React.Component {
                             title={`${item.episodeName} `}
                             avatar={
                                 <View>
-                                    <Image style={styles.stretch} source={{uri: "http://t1.daumcdn.net/thumb/S222x140/?fname="+item.imageUrl}} />
+                                    <Image style={styles.stretch} source={{uri: "http://t1.daumcdn.net/thumb/S222x140/?fname="+item.imageUrl}}  />
                                 </View>
                             }
                             subtitle={item.projectName}
