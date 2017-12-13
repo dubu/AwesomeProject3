@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, ActivityIndicator, Button } from "react-native";
+import {View, Text, FlatList, ActivityIndicator, Button, Image, StyleSheet} from "react-native";
 import { List, ListItem, SearchBar } from "react-native-elements";
 
 
@@ -19,7 +19,6 @@ const HomeScreen = ({ navigation }) => (
     <HomeScreenView navigation={navigation} />
 );
 
-
 class HomeScreenView extends React.Component {
     state = {selected: (new Map(): Map<string, boolean>)};
 
@@ -36,7 +35,7 @@ class HomeScreenView extends React.Component {
     }
 
     makeRemoteRequest = () => {
-        var url = "https://randomuser.me/api/?page=3&results=5";
+        var url = "https://randomuser.me/api/?page=3&results=3";
         var req = fetch(url ).then(res => res.json());
         Promise.all([req])
             .then(([data]) => {
@@ -52,8 +51,15 @@ class HomeScreenView extends React.Component {
             });
     }
 
+
     render() {
-        const { navigation } = this.props;
+        const {navigation} = this.props;
+        const styles = StyleSheet.create({
+            stretch: {
+                width: 100,
+                height: 100
+            }
+        });
         return <View>
             <Text>Home Screen</Text>
             <Button
@@ -67,8 +73,12 @@ class HomeScreenView extends React.Component {
                     renderItem={({ item }) => (
                         <ListItem
                             title={`${item.name.first} ${item.name.last}`}
-                            subtitle={"aa"}
-                            avatar={{ uri: item.picture.thumbnail }}
+                            subtitle={
+                                <View>
+                                    <Image style={styles.stretch} source={{uri: item.picture.thumbnail }} />
+                                    <Text>5 months ago</Text>
+                                </View>
+                            }
                             containerStyle={{ borderBottomWidth: 0 }}
                         />
                     )}
