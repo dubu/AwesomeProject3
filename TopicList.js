@@ -61,7 +61,6 @@ class HomeScreenView extends React.Component {
             }
         });
 
-
         return <View>
             <Text>Home Screen</Text>
             <Button
