@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, FlatList, ActivityIndicator, Button, Image, StyleSheet, ScrollView} from "react-native";
 import { List, ListItem, SearchBar } from "react-native-elements";
-import HTML from 'react-native-render-html';
 
 
 // const HomeScreen = ({ navigation }) => (
@@ -37,8 +36,8 @@ class HomeScreenView extends React.Component {
 
     makeRemoteRequest = () => {
         // var url = "https://randomuser.me/api/?page=3&results=3";
-        // var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
-        var url = "https://storyfunding.kakao.com/toros/article"
+        //var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
+         var url = "https://storyfunding.kakao.com/toros/article"
         var req = fetch(url ).then(res => res.json());
         Promise.all([req])
             .then(([data]) => {
@@ -100,10 +99,10 @@ class HomeScreenView extends React.Component {
                 />
             </List>
 
-            <Button
-                onPress={() => navigation.navigate('FlatList')}
-                title="Goto List"
-            />
+            {/*<Button*/}
+                {/*onPress={() => navigation.navigate('FlatList')}*/}
+                {/*title="Goto List"*/}
+            {/*/>*/}
         </View>
     }
 

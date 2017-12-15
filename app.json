@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "sdkVersion": "23.0.0",
+    "name": "Your App Name",
+    "icon": "./ic_launcher.png",
+    "version": "1.0.0",
+    "slug": "dubu-app-slug",
+    "ios": {
+      "bundleIdentifier": "com.dubu.kong"
+    },
+    "android": {
+      "package": "com.dubu.kong"
+    }
   }
 }
