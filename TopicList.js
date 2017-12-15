@@ -61,7 +61,6 @@ class HomeScreenView extends React.Component {
         //     <HTML html={htmlContent} />
         // </ScrollView>
 
-
     }
 
     render() {
@@ -92,7 +91,7 @@ class HomeScreenView extends React.Component {
                                 </View>
                             }
                             subtitle={item.projectName}
-                            onPress={this.moveLink(item.content)}
+                            onPress={() => this.props.navigation.navigate('Details', {name: 'Lucy', content : item.content})}
                             containerStyle={{ borderBottomWidth: 0 }}
                         />
                     )}
