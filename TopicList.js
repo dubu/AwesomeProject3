@@ -37,8 +37,8 @@ class HomeScreenView extends React.Component {
 
     makeRemoteRequest = () => {
         // var url = "https://randomuser.me/api/?page=3&results=3";
-        var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
-        // var url = "https://storyfunding.kakao.com/toros/article"
+        // var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
+        var url = "https://storyfunding.kakao.com/toros/article"
         var req = fetch(url ).then(res => res.json());
         Promise.all([req])
             .then(([data]) => {
@@ -60,6 +60,8 @@ class HomeScreenView extends React.Component {
         // <ScrollView style={{ flex: 1 }}>
         //     <HTML html={htmlContent} />
         // </ScrollView>
+
+
     }
 
     render() {
