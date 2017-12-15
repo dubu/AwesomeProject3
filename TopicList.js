@@ -37,8 +37,8 @@ class HomeScreenView extends React.Component {
 
     makeRemoteRequest = () => {
         // var url = "https://randomuser.me/api/?page=3&results=3";
-        // var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
-        var url = "https://storyfunding.kakao.com/toros/article"
+        var url = "https://raw.githubusercontent.com/dubu/my-web/master/public/articles.json"
+        // var url = "https://storyfunding.kakao.com/toros/article"
         var req = fetch(url ).then(res => res.json());
         Promise.all([req])
             .then(([data]) => {
@@ -74,10 +74,10 @@ class HomeScreenView extends React.Component {
 
         return <View>
             <Text>Home Screen</Text>
-            <Button
-                onPress={() => navigation.navigate('Details')}
-                title="Goto detail"
-            />
+            {/*<Button*/}
+                {/*onPress={() => navigation.navigate('Details')}*/}
+                {/*title="Goto detail"*/}
+            {/*/>*/}
 
             <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
                 <FlatList
