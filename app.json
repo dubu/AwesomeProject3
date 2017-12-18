@@ -11,5 +11,7 @@
     "android": {
       "package": "com.dubu.kong"
     }
-  }
+  },
+  "name": "Storyfunding",
+  "displayName": "Storyfunding"
 }
